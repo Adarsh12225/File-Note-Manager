@@ -25,7 +25,7 @@ notes-app/
 │── README.md
 ## ⚡ Installation & Setup
 1. Clone the repository:
-   git clone https://github.com/your-username/notes-app.git
+   git clone https://github.com/Adarsh12225/File-Note-Manager.git
    cd notes-app
 bash
 Copy code
