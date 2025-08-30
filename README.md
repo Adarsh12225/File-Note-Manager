@@ -1,32 +1,59 @@
-# 📝 Notes App with Node.js & Express
+📒 File Note Manager
 
-This is a beginner-friendly **Notes App** built using **Node.js** and **Express.js**.  
-It was created as part of my Node.js learning journey to understand the difference between:
-- A plain Node.js HTTP server
-- An Express-powered server with routes and a simple frontend .
-## 🚀 Features
-- 📌 Add new notes
-- 📂 Fetch all saved notes
-- ⚙️ Get system info (process ID, uptime, platform) with artificial delay
-- 🌐 REST API tested with Postman
-- 🎨 Simple UI (Bootstrap + HTML) to interact with the API
-## 🛠️ Tech Stack
-- **Node.js (http, fs, path, events, process, timers)**
-- **Express.js**
-- **Bootstrap** (for frontend UI)
-- **Postman** (for API testing)
-## 📂 Project Structure
-notes-app/
-│── index.js # Plain Node.js HTTP server (port 4000)
-│── api.js # Express API + UI (port 5000)
-│── public/
-│ └── index.html # Frontend UI
-│── package.json
-│── README.md
-## ⚡ Installation & Setup
-1. Clone the repository:
-   git clone https://github.com/Adarsh12225/File-Note-Manager.git
-   cd notes-app
-bash
-Copy code
-npm install express
+A simple Note Manager Application built with Node.js, Express, MongoDB, and Vanilla JS.
+It allows users to add, view, edit, and delete notes with a minimal frontend and a connected MongoDB database.
+
+🚀 Features
+
+➕ Add notes with title and content
+
+📑 View all saved notes
+
+✏️ Edit notes directly (in-place editing, like a text editor)
+
+❌ Delete notes easily
+
+💾 Data is persisted in MongoDB Compass (local database)
+
+🛠️ Tech Stack
+
+Backend: Node.js, Express, Mongoose
+
+Database: MongoDB (via MongoDB Compass)
+
+Frontend: HTML, CSS, Vanilla JavaScript
+
+Version Control: Git + GitHub
+
+⚙️ Installation & Setup
+
+Clone the repo
+
+git clone https://github.com/Adarsh12225/File-Note-Manager.git
+cd File-Note-Manager
+
+
+Install dependencies
+
+npm install
+
+
+Start the server
+
+node api.js
+
+
+Server will run at: http://localhost:5000
+
+Open public/index.html in browser for the frontend.
+
+🗄️ Database Setup (MongoDB Compass)
+
+Open MongoDB Compass and connect to:
+
+mongodb://127.0.0.1:27017
+
+
+Database name: noteManager
+
+Collection name: notes
