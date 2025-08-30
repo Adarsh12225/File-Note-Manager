@@ -2,22 +2,19 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Notes App</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>File Note Manager</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div class="container">
-    <h1>📒 Notes App</h1>
-
-    <form id="noteForm">
-      <input type="text" id="noteInput" placeholder="Write a note..." required />
-      <button type="submit">Add Note</button>
-    </form>
-
-    <h2>Saved Notes</h2>
-    <ul id="notesList"></ul>
+  <h1>📒 File Note Manager</h1>
+  <div class="form-container">
+    <input type="text" id="title" placeholder="Note Title">
+    <textarea id="content" placeholder="Note Content"></textarea>
+    <button onclick="addNote()">Add Note</button>
   </div>
-
+  <h2>All Notes</h2>
+  <div id="notes"></div>
   <script src="script.js"></script>
 </body>
 </html>

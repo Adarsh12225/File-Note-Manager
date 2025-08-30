@@ -1,31 +1,65 @@
 const express = require("express");
-const fs = require("fs");
+const mongoose = require("mongoose");
+const cors = require("cors");
 const path = require("path");
 
 const app = express();
-app.use(express.json());
+const PORT = 5000;
 
-// serve static UI
+// Middleware
+app.use(express.json());
+app.use(cors());
 app.use(express.static(path.join(__dirname, "public")));
 
-// GET all notes
-app.get("/notes", (req, res) => {
-  fs.readFile("notes.txt", "utf-8", (err, data) => {
-    if (err) return res.status(500).json({ error: "Could not read file" });
-    const notes = data ? data.trim().split("\n") : [];
-    res.json({ notes });
-  });
+// MongoDB Connection
+mongoose.connect("mongodb://127.0.0.1:27017/noteManager")
+  .then(() => console.log("✅ Connected to MongoDB"))
+  .catch(err => console.error("❌ MongoDB connection error:", err));
+
+
+// Schema & Model
+const noteSchema = new mongoose.Schema({
+  title: String,
+  content: String
 });
 
-// POST new note
-app.post("/notes", (req, res) => {
-  const { note } = req.body;
-  if (!note) return res.status(400).json({ error: "Note is required" });
+const Note = mongoose.model("Note", noteSchema);
 
-  fs.appendFile("notes.txt", note + "\n", (err) => {
-    if (err) return res.status(500).json({ error: "Could not save note" });
-    res.status(201).json({ message: "Note added", note });
-  });
+// Routes
+// Get all notes
+app.get("/api/notes", async (req, res) => {
+  const notes = await Note.find();
+  res.json(notes);
 });
 
-app.listen(5000, () => console.log("Express API + UI at http://localhost:5000"));
+// Add new note
+app.post("/api/notes", async (req, res) => {
+  const { title, content } = req.body;
+  const newNote = new Note({ title, content });
+  await newNote.save();
+  res.json(newNote);
+});
+
+// Update note
+app.put("/api/notes/:id", async (req, res) => {
+  const { id } = req.params;
+  const { title, content } = req.body;
+  const updatedNote = await Note.findByIdAndUpdate(
+    id,
+    { title, content },
+    { new: true }
+  );
+  res.json(updatedNote);
+});
+
+// Delete note
+app.delete("/api/notes/:id", async (req, res) => {
+  const { id } = req.params;
+  await Note.findByIdAndDelete(id);
+  res.json({ message: "Note deleted" });
+});
+
+// Start Server
+app.listen(PORT, () => {
+  console.log(`🚀 Server running at http://localhost:${PORT}`);
+});
